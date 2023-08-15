@@ -10,6 +10,8 @@ public class TicTacToe implements ActionListener {
     private JLabel textField;
     private JButton[] buttons;
     private boolean player1Turn;
+    private String playerXName;
+    private String playerOName;
 
     public TicTacToe() {
         frame = new JFrame();
@@ -48,7 +50,13 @@ public class TicTacToe implements ActionListener {
         titlePanel.add(textField);
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(buttonPanel);
+        getPlayerNames();
         firstTurn();
+    }
+
+    private void getPlayerNames() {
+        playerXName = JOptionPane.showInputDialog(frame, "Enter Player X's name:", "Player X Name", JOptionPane.PLAIN_MESSAGE);
+        playerOName = JOptionPane.showInputDialog(frame, "Enter Player O's name:", "Player O Name", JOptionPane.PLAIN_MESSAGE);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -56,10 +64,10 @@ public class TicTacToe implements ActionListener {
             if (e.getSource() == buttons[i] && buttons[i].getText().equals("")) {
                 if (player1Turn) {
                     buttons[i].setText("X");
-                    textField.setText("O's Turn");
+                    textField.setText(playerOName + "'s Turn");
                 } else {
                     buttons[i].setText("O");
-                    textField.setText("X's Turn");
+                    textField.setText(playerXName + "'s Turn");
                 }
                 buttons[i].setEnabled(false);
                 player1Turn = !player1Turn;
@@ -76,10 +84,10 @@ public class TicTacToe implements ActionListener {
         }
         if (Math.random() < 0.5) {
             player1Turn = true;
-            textField.setText("X's Turn");
+            textField.setText(playerXName + "'s Turn");
         } else {
             player1Turn = false;
-            textField.setText("O's Turn");
+            textField.setText(playerOName + "'s Turn");
         }
     }
 
@@ -125,29 +133,26 @@ public class TicTacToe implements ActionListener {
         return true;
     }
 
-    
-public void xWins() {
-    for (int i = 0; i < 9; i++) {
-        buttons[i].setEnabled(false);
+    public void xWins() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setEnabled(false);
+        }
+        textField.setText(playerXName + " wins!");
     }
-    textField.setText("X wins!");
-}
 
-public void oWins() {
-    for (int i = 0; i < 9; i++) {
-        buttons[i].setEnabled(false);
+    public void oWins() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setEnabled(false);
+        }
+        textField.setText(playerOName + " wins!");
     }
-    textField.setText("O wins!");
-}
 
-public void draw() {
-    for (int i = 0; i < 9; i++) {
-        buttons[i].setEnabled(false);
+    public void draw() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setEnabled(false);
+        }
+        textField.setText("It's a draw!");
     }
-    textField.setText("It's a draw!");
-}
-
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
