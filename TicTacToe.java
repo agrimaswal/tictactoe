@@ -125,8 +125,7 @@ public class TicTacToe implements ActionListener {
         return true;
     }
 
-    // ... Previous code ...
-
+    
 public void xWins() {
     for (int i = 0; i < 9; i++) {
         buttons[i].setEnabled(false);
@@ -148,7 +147,7 @@ public void draw() {
     textField.setText("It's a draw!");
 }
 
-// ... Rest of the code ...
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
